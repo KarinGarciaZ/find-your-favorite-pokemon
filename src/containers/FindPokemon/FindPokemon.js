@@ -11,13 +11,20 @@ class FindPokemon extends Component {
     disableButton: true
   }
 
+  /*This function is called everytime the main input changes,
+  I set the value of the input to state.pokemonToFind, if the 
+  input's values is empty then I disable the button to search.*/
   onChangeValue = ( event ) => {
     if ( event.target.value === '' )
-      this.setState({ pokemonToFind: event.target.value })
+      this.setState({ pokemonToFind: event.target.value, disableButton: true })
     else
       this.setState({ pokemonToFind: event.target.value, disableButton: false })
   }
 
+  /*Here I make a request to the API, I concatenate the state.pokemonToFind value.
+  In the second .then, once I have the data to handle, I call the method handleData()
+  which I send the data and it returns the information I want to show to the user 
+  and I set it into state.pokemonData.*/
   searchPokemon = () => {
     fetch( `https://pokeapi.co/api/v2/pokemon/${this.state.pokemonToFind}/` )
       .then( res => res.json() )
@@ -28,6 +35,8 @@ class FindPokemon extends Component {
       })
   }
 
+  /*This method returns a promise which contains the information I want to
+  show to the user.*/
   handleData = ( data ) => {
     return new Promise( resolve => {
       let info = {...data};
@@ -61,13 +70,15 @@ class FindPokemon extends Component {
   render() {
     return(
       <div style={{ marginTop:'20px' }}>
-        <PokemonToFind 
-          name={this.state.pokemonToFind} 
+        <PokemonToFind                    //This shows the main input and the button.
+          name={this.state.pokemonToFind}
           valueChanged={this.onChangeValue} 
           clicked={this.searchPokemon} 
           disableButton={this.state.disableButton}/><hr />
 
-        {( this.state.showData ) ? <ShowDataPokemon data={this.state.pokemonData}/>: null }
+        { //this shows the pokemon information.
+          ( this.state.showData ) ? <ShowDataPokemon data={this.state.pokemonData}/>: null 
+        }
       </div>
     )
   }

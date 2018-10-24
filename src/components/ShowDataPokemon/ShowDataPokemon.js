@@ -1,6 +1,9 @@
 import React from 'react';
 
 const showDataPokemon = ( props ) => {
+
+  /*Here I make an array of <li> where every <li> contains a type of the pokemon to show.
+  This array will be shown in the jsx code.*/
   let types = null;
   if( props.data.types ) {
     types = props.data.types.map( element => {
@@ -8,6 +11,8 @@ const showDataPokemon = ( props ) => {
     })
   }
 
+  /*Here I make an array of <li> where every <li> contains an ability of the pokemon to show.
+  This array will be shown in the jsx code.*/
   let abilities = null;
   if( props.data.abilities ) {
     abilities = props.data.abilities.map( element => {
@@ -15,6 +20,8 @@ const showDataPokemon = ( props ) => {
     })
   }
 
+  /*Here I make an array of <li> where every <li> contains a game of the pokemon to show.
+  This array will be shown in the jsx code.*/
   let games = null;
   if( props.data.games ) {
     games = props.data.games.map( element => {
@@ -22,6 +29,10 @@ const showDataPokemon = ( props ) => {
     })
   }
 
+  /*Here I make an array of <li> where every <li> contains a move of the pokemon to show.
+  After I'll slice this array in three parts, because normally this array is too long, so
+  I make three parts of this to make them shorter.
+  These arrays will be shown in the jsx code.*/
   let moves1 = null;
   let moves2 = null;
   let moves3 = null;
@@ -35,6 +46,8 @@ const showDataPokemon = ( props ) => {
     moves3 = moves.slice( moves.length/3*2, moves.length)
   }
   
+  /*Here I structure the data to be shown, I use data from props and
+  the <li> arrays I created.*/
   return(
     <div className='container'>
       <div className='row'>

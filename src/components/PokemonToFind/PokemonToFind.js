@@ -1,6 +1,7 @@
 import React from 'react';
 
 const pokemonToFind = ( props ) => {
+  /*Here I simply show the input and the button.*/
   return(
     <div className='row'>
       <div className='col-3'>
