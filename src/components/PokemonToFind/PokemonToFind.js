@@ -7,10 +7,10 @@ const pokemonToFind = ( props ) => {
 
       </div>
       <div className='col-6'>
-        <input type='text' className="form-control" placeholder='Find your pokemon by its Name or ID...' value={ props.name } onChange={ props.valueChanged }/>
+        <input type='text' className="form-control" placeholder='Find your pokemon by its Name or Pokedex Number...' value={ props.name } onChange={ props.valueChanged }/>
       </div>
       <div className='col-3'>
-        <button className='btn btn-primary' onClick={props.clicked}>Find</button>
+        <button className='btn btn-primary' onClick={props.clicked} disabled={props.disableButton}>Find</button>
       </div>
     </div>
   )

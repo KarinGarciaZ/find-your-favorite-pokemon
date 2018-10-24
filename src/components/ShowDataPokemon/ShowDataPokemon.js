@@ -1,7 +1,6 @@
 import React from 'react';
 
 const showDataPokemon = ( props ) => {
-  console.log('props: ', props);
   let types = null;
   if( props.data.types ) {
     types = props.data.types.map( element => {
@@ -12,14 +11,14 @@ const showDataPokemon = ( props ) => {
   let abilities = null;
   if( props.data.abilities ) {
     abilities = props.data.abilities.map( element => {
-      return <li key={element} className="list-group-item list-group-item-primary">{element}</li>
+      return <li key={element} className="list-group-item list-group-item-dark">{element}</li>
     })
   }
 
   let games = null;
   if( props.data.games ) {
     games = props.data.games.map( element => {
-      return <li key={element} >{element}</li>
+      return <li className="list-group-item" style={{padding: '.25rem 1.25rem'}} key={element} >{element}</li>
     })
   }
 
@@ -39,29 +38,29 @@ const showDataPokemon = ( props ) => {
   return(
     <div className='container'>
       <div className='row'>
-        <div className='col-12 col-md-1'>
+        <div className='col-12 col-md-2'>
           <img src={props.data.imageFront} alt="MyImage" />
           <img src={props.data.imageBack} alt="MyImage" />
         </div>
-        <div className='col-6 col-md-2'>
-          <label>ID</label>
-          <input type="text" className="form-control" value={props.data.id} />
+        <div className='col-12 col-sm-6 col-md-2'>
+          <label>Pokedex Number</label>
+          <input type="text" className="form-control" value={props.data.id} readOnly/><br/>
           <label>Height</label>
-          <input type="text" className="form-control" value={props.data.height} />          
+          <input type="text" className="form-control" value={props.data.height} readOnly/>          
         </div>
-        <div className='col-6 col-md-3'>
+        <div className='col-12 col-sm-6 col-md-3'>
           <label>Name</label>
-          <input type="text" className="form-control" value={props.data.name} />
+          <input type="text" className="form-control" value={props.data.name} readOnly/><br/>
           <label>Weight</label>
-          <input type="text" className="form-control" value={props.data.weight} />          
+          <input type="text" className="form-control" value={props.data.weight} readOnly/>          
         </div>
-        <div className='col-6 col-md-3'>
+        <div className='col-12 col-sm-6 col-md-2'>
           <label>Types</label>
           <ul className="list-group">
             {types}
           </ul>
         </div>
-        <div className='col-6 col-md-3'>
+        <div className='col-12 col-sm-6 col-md-3'>
           <label>Abilities</label>
           <ul className="list-group">
             {abilities}
@@ -69,26 +68,26 @@ const showDataPokemon = ( props ) => {
         </div>
       </div>     
       <div className='row' style={{marginTop: '20px'}}>
-        <div className='col-12 col-md-3'>
-          <label>Games where appears</label>
-          <ul>
+        <div className='col-12 col-sm-6 col-md-3'>
+          <label><strong>Games where appears</strong></label>
+          <ul className="list-group list-group-flush">
             {games}
           </ul>
         </div>
-        <div className='col-12 col-md-3'>
-          <label>Moves</label>
+        <div className='col-12 col-sm-6 col-md-3'>
+          <label><strong>Moves</strong></label>
           <ul>
             {moves1}
           </ul>
         </div>
-        <div className='col-12 col-md-3'>
-        <label>Moves</label>
+        <div className='col-12 col-sm-6 col-md-3'>
+        <label><strong>Moves</strong></label>
           <ul>
             {moves2}
           </ul>
         </div>
-        <div className='col-12 col-md-3'>
-        <label>Moves</label>
+        <div className='col-12 col-sm-6 col-md-3'>
+        <label><strong>Moves</strong></label>
           <ul>
             {moves3}
           </ul>
