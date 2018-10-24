@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PokemonToFind from '../../components/PokemonToFind/PokemonToFind';
 import ShowDataPokemon from '../../components/ShowDataPokemon/ShowDataPokemon';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 class FindPokemon extends Component {
 
