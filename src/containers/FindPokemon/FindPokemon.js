@@ -69,7 +69,7 @@ class FindPokemon extends Component {
   
   render() {
     return(
-      <div style={{ marginTop:'20px' }}>
+      <div>
         <PokemonToFind                    //This shows the main input and the button.
           name={this.state.pokemonToFind}
           valueChanged={this.onChangeValue} 
