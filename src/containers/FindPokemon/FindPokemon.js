@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PokemonToFind from '../../components/PokemonToFind/PokemonToFind';
 import ShowDataPokemon from '../../components/ShowDataPokemon/ShowDataPokemon';
+import PokemonImages from '../../components/PokemonImages/PokemonImages';
 
 class FindPokemon extends Component {
 
@@ -70,14 +71,14 @@ class FindPokemon extends Component {
   render() {
     return(
       <div>
-        <PokemonToFind                    //This shows the main input and the button.
+        <PokemonToFind     //This shows the main input and the button.
           name={this.state.pokemonToFind}
           valueChanged={this.onChangeValue} 
           clicked={this.searchPokemon} 
           disableButton={this.state.disableButton}/><hr />
 
         { //this shows the pokemon information.
-          ( this.state.showData ) ? <ShowDataPokemon data={this.state.pokemonData}/>: null 
+          ( this.state.showData ) ? <ShowDataPokemon data={this.state.pokemonData}/>: <PokemonImages /> 
         }
       </div>
     )
