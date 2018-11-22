@@ -8,8 +8,8 @@ class PokemonImages extends Component {
   render() {
     let cards = this.props.pokemons.map( eachPokemon => {
       let types = eachPokemon.types.map( type => {
-        return( <div className='cards__details--type-pokemon'>
-                  <p key={type.type.name} className={ type.type.name }>{type.type.name}</p>
+        return( <div key={type.type.name} className='cards__details--type-pokemon'>
+                  <p className={ type.type.name }>{type.type.name}</p>
                 </div>
               )
       })
