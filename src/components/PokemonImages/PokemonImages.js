@@ -20,7 +20,7 @@ class PokemonImages extends Component {
               </div>
             </div>     
     } )
-    console.log(this.props.pokemons)
+    
     return(
       <div className="container-flex">
         { cards }

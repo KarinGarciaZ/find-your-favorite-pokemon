@@ -10,11 +10,47 @@ class FindPokemon extends Component {
     pokemonData: {},
     showData: false,
     disableButton: true,
-    initialPokemons: []
+    initialPokemons: [],
+    pokemonShown: 0
   }
 
   componentDidMount() {
     this.searchAllPokemons()
+  }
+
+  get4Pokemons = ( arrayNames ) => {
+    let _4promises = [];
+    for( let index = 0; index < 4; index++ ){
+      _4promises.push(
+        fetch(`https://pokeapi.co/api/v2/pokemon/${arrayNames[this.state.pokemonShown + index]}/`)
+        .then( res => res.json() )
+        ) 
+    }
+
+    Promise.all(_4promises)
+    .then( arrayRes => {
+      let pokemonInfoToUseArray = [];
+
+      pokemonInfoToUseArray = arrayRes.map( eachPokemon => {
+        let pokemonInfoToUse = {};
+        pokemonInfoToUse.name = eachPokemon.name;
+        pokemonInfoToUse.id = eachPokemon.id;
+        pokemonInfoToUse.img = eachPokemon.sprites.front_default;
+        pokemonInfoToUse.types = eachPokemon.types;
+
+        return pokemonInfoToUse;
+      } )
+
+      let allPokemonsUntilNow = this.state.initialPokemons.concat(pokemonInfoToUseArray);
+      this.setState({ 
+        initialPokemons: allPokemonsUntilNow,
+        pokemonShown: this.state.pokemonShown + 4
+       })
+
+       console.log(arrayNames)
+       if( this.state.pokemonShown < arrayNames.length )
+        this.get4Pokemons( arrayNames );
+    } )
   }
 
   searchAllPokemons = async () => {
@@ -26,30 +62,8 @@ class FindPokemon extends Component {
     arrayNames = data.results.map( pokemon => pokemon.name );
     arrayNames = arrayNames.splice(0, arrayNames.length -57);
 
-    let promises = [];
-    arrayNames.forEach( element => {
-      promises.push(
-        fetch(`https://pokeapi.co/api/v2/pokemon/${element}/`)
-        .then( res => res.json() )
-        )      
-    })
-
-    Promise.all(promises)
-    .then( arrayRes => {
-      let pokemonInfoToUseArray = [];
-      pokemonInfoToUseArray = arrayRes.map( eachPokemon => {
-        let pokemonInfoToUse = {};
-        pokemonInfoToUse.name = eachPokemon.name;
-        pokemonInfoToUse.id = eachPokemon.id;
-        pokemonInfoToUse.img = eachPokemon.sprites.front_default;
-        pokemonInfoToUse.types = eachPokemon.types;
-
-        return pokemonInfoToUse;
-      } )
-      this.setState({ initialPokemons: pokemonInfoToUseArray })
-    } )
-    
-    
+    this.get4Pokemons(arrayNames);
+   
   }
 
   generateRandomNumber = (  ) => {
