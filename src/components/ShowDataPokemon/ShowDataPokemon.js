@@ -19,11 +19,19 @@ class ShowDataPokemon extends Component {
   }
 
   componentDidMount() {
-    this.searchPokemon();
+    let id = this.props.match.params.id;
+    this.searchPokemon( id );
   }
 
-  searchPokemon = () => {
-    fetch( `https://pokeapi.co/api/v2/pokemon/${this.props.match.params.id}/` )
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      const id = nextProps.match.params.id
+      this.searchPokemon( id );
+    }
+  }
+
+  searchPokemon = (id) => {
+    fetch( `https://pokeapi.co/api/v2/pokemon/${id}/` )
       .then( res => res.json() )
       .catch( error => console.error('Error:', error) )
       .then( data => this.handleData(data) )
