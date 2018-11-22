@@ -30,7 +30,7 @@ class ShowDataPokemon extends Component {
     }
   }
 
-  searchPokemon = (id) => {
+  searchPokemon = ( id ) => {
     fetch( `https://pokeapi.co/api/v2/pokemon/${id}/` )
       .then( res => res.json() )
       .catch( error => console.error('Error:', error) )
