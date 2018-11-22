@@ -43,6 +43,7 @@ class ShowDataPokemon extends Component {
   handleData = ( data ) => {
     return new Promise( resolve => {
       let info = {...data};
+      console.log(info)
       let pokemonInfo = {};
       pokemonInfo.name = info.forms[0].name;        
       pokemonInfo.id = info.id;        

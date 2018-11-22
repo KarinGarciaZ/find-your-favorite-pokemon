@@ -63,7 +63,7 @@ body {
   perspective: 150rem;
   -moz-perspective: 150rem;
   position: relative;
-  height: 20rem;
+  height: 22rem;
   width: 15rem;
   transition: all .2s ease;
   border-radius: .3rem;
@@ -79,19 +79,86 @@ body {
     height: 10rem;
     background-blend-mode: overlay;
     text-align: center; }
-  .cards__details {
-    padding: .5rem; }
-    .cards__details ul {
-      list-style: none;
-      width: 80%;
-      margin: 0 auto; }
-      .cards__details ul li {
-        text-align: center;
-        font-size: 1.4rem;
-        padding: .1rem;
-        text-transform: capitalize; }
-        .cards__details ul li:not(:last-child) {
-          border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+  .cards__details ul {
+    list-style: none;
+    width: 80%;
+    margin: 0 auto; }
+    .cards__details ul li {
+      text-align: center;
+      font-size: 1.4rem;
+      padding: .1rem;
+      text-transform: capitalize; }
+      .cards__details ul li:not(:last-child) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+  .cards__details--type-pokemon {
+    padding-top: .5rem;
+    text-align: center;
+    position: relative;
+    height: 2rem; }
+    .cards__details--type-pokemon p {
+      color: antiquewhite;
+      border: 1px solid antiquewhite;
+      text-transform: uppercase;
+      border-radius: 4px;
+      padding: 0 4px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%); }
+
+.fire {
+  background-color: red; }
+
+.grass {
+  background-color: green; }
+
+.normal {
+  background-color: #775221; }
+
+.fighting {
+  background-color: #da5a11; }
+
+.flying {
+  background-color: #5b5bf3; }
+
+.poison {
+  background-color: #680268; }
+
+.ground {
+  background-color: #e6bb6b; }
+
+.rock {
+  background-color: #968b78; }
+
+.bug {
+  background-color: #84b458; }
+
+.ghost {
+  background-color: #5210bd; }
+
+.steel {
+  background-color: #bdbdbd; }
+
+.water {
+  background-color: #0059ff; }
+
+.electric {
+  background-color: yellow;
+  color: gray !important; }
+
+.psychic {
+  background-color: palevioletred; }
+
+.fairy {
+  background-color: pink; }
+
+.ice {
+  background-color: #67c2ff; }
+
+.dragon {
+  background-color: #5031be; }
+
+.dark {
+  background-color: #1a0606; }
 
 .container-flex {
   display: flex;
