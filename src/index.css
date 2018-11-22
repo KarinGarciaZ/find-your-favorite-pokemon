@@ -1,15 +1,105 @@
-body {
+@charset "UTF-8";
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  box-sizing: border-box;
-}
+  box-sizing: inherit;
+  /*Hace que todos hereden esta propiedad del padre, así que todos heredan de body*/ }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
+html {
+  font-size: 62.5%;
+  /*Esto para hacer que el font-size sea de 10px,
+                   pues toma en cuenta los 16px del navegador. Esto es un ram*/ }
+
+body {
+  box-sizing: border-box; }
+
+.control-form {
+  display: block;
+  width: 100%;
+  height: calc(2.25rem + 2px);
+  padding: 1.5rem;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .4rem; }
+
+.botton {
+  font-size: 1.6rem;
+  background-color: red;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; }
+  .botton:hover {
+    background-color: #c00303; }
+  .botton:focus {
+    outline: none; }
+
+.cards {
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+  position: relative;
+  height: 20rem;
+  width: 15rem;
+  transition: all .4s ease;
+  border-radius: .3rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  margin: 1rem; }
+  .cards:hover {
+    transform: scale(1.1);
+    cursor: pointer; }
+  .cards__picture {
+    background-size: cover;
+    background-position: top;
+    height: 10rem;
+    background-blend-mode: overlay;
+    text-align: center; }
+  .cards__details {
+    padding: .5rem; }
+    .cards__details ul {
+      list-style: none;
+      width: 80%;
+      margin: 0 auto; }
+      .cards__details ul li {
+        text-align: center;
+        font-size: 1.4rem;
+        padding: .1rem;
+        text-transform: capitalize; }
+        .cards__details ul li:not(:last-child) {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+
+.container-flex {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; }
+
+.rowg {
+  max-width: 150rem;
+  margin: 0 auto; }
+  .rowg:not(:last-child) {
+    margin-bottom: 8rem; }
+  .rowg::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .rowg [class^="col-"] {
+    float: left; }
+    .rowg [class^="col-"]:not(:last-child) {
+      margin-right: 4rem; }
+  .rowg .col-1-of-10 {
+    width: calc((100% - 4rem * 9) / 10); }
+  .rowg .col-2-of-10 {
+    width: calc( 2 * ( ( 100% - 4rem * 9 ) / 10 ) +  4rem); }
+  .rowg .col-3-of-10 {
+    width: calc( 3 * ( ( 100% - 4rem * 9 ) / 10 ) +  4rem * 2); }
+  .rowg .col-4-of-10 {
+    width: calc( 4 * ( ( 100% - 4rem * 9 ) / 10 ) +  4rem * 3); }
+  .rowg .col-5-of-10 {
+    width: calc( 5 * ( ( 100% - 4rem * 9 ) / 10 ) +  4rem * 4); }
