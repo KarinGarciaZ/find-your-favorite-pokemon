@@ -1,0 +1,17 @@
+*,
+*::before,
+*::after { 
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;/*Hace que todos hereden esta propiedad del padre, así que todos heredan de body*/
+}
+
+html {
+  font-size: 62.5%;/*Esto para hacer que el font-size sea de 10px,
+                   pues toma en cuenta los 16px del navegador. Esto es un ram*/
+}
+
+body {
+  box-sizing: border-box;
+}
+

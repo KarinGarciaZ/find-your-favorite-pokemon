@@ -1,0 +1,52 @@
+.cards {
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+  position: relative;
+  height: 20rem;
+  width: 15rem;
+  transition: all .4s ease;
+  border-radius: .3rem;
+  box-shadow: 0 .5rem 2rem $black-transparent-2;
+  overflow: hidden;
+  margin: 1rem;
+
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+
+  &__picture {
+    background-size: cover; 
+    background-position: top;
+    height: 10rem;    
+    background-blend-mode: overlay;        
+    text-align: center;
+  }
+
+  &__details {
+    padding: .5rem;
+
+    ul {
+      list-style: none;
+      width: 80%;
+      margin: 0 auto;
+
+      li {
+        text-align: center;
+        font-size: 1.4rem;
+        padding: .1rem;
+        text-transform: capitalize;
+
+        &:not(:last-child) {
+          border-bottom: 1px  solid $black-transparent-2;
+        }
+      }
+    }
+  }
+}
+
+.container-flex {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
