@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.3",
+    "node-sass": "^4.10.0",
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3",
@@ -11,6 +12,7 @@
     "react-scripts": "2.0.5"
   },
   "scripts": {
+    "compile:sass": "node-sass src/assets/scss/main.scss src/Index.css -w",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
