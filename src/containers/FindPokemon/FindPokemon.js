@@ -9,12 +9,60 @@ class FindPokemon extends Component {
     pokemonToFind: '',
     pokemonData: {},
     showData: false,
-    disableButton: true
+    disableButton: true,
+    initialPokemons: []
   }
 
-  /*This function is called everytime the main input changes,
-  I set the value of the input to state.pokemonToFind, if the 
-  input's values is empty then I disable the button to search.*/
+  componentDidMount() {
+    this.searchAllPokemons()
+  }
+
+  searchAllPokemons = async () => {
+
+    let res = await fetch( `https://pokeapi.co/api/v2/pokemon/` )
+    let data = await res.json()
+        
+    let arrayNames = [];
+    arrayNames = data.results.map( pokemon => pokemon.name );
+    arrayNames = arrayNames.splice(0, arrayNames.length -57);
+
+    let promises = [];
+    arrayNames.forEach( element => {
+      promises.push(
+        fetch(`https://pokeapi.co/api/v2/pokemon/${element}/`)
+        .then( res => res.json() )
+        )      
+    })
+
+    Promise.all(promises)
+    .then( arrayRes => {
+      let pokemonInfoToUseArray = [];
+      pokemonInfoToUseArray = arrayRes.map( eachPokemon => {
+        let pokemonInfoToUse = {};
+        pokemonInfoToUse.name = eachPokemon.name;
+        pokemonInfoToUse.id = eachPokemon.id;
+        pokemonInfoToUse.img = eachPokemon.sprites.front_default;
+        pokemonInfoToUse.types = eachPokemon.types;
+
+        return pokemonInfoToUse;
+      } )
+      this.setState({ initialPokemons: pokemonInfoToUseArray })
+    } )
+    
+    
+  }
+
+  generateRandomNumber = (  ) => {
+    return new Promise( resolve => {
+      let numbers = [];
+      for (let index = 0; index < 100; index++) {
+        let number = Math.random() * 800;
+        numbers.push(Math.round(number)+1);      
+      } 
+      resolve(numbers)
+    })     
+  }
+
   onChangeValue = ( event ) => {
     if ( event.target.value === '' )
       this.setState({ pokemonToFind: event.target.value, disableButton: true })
@@ -22,10 +70,6 @@ class FindPokemon extends Component {
       this.setState({ pokemonToFind: event.target.value, disableButton: false })
   }
 
-  /*Here I make a request to the API, I concatenate the state.pokemonToFind value.
-  In the second .then, once I have the data to handle, I call the method handleData()
-  which I send the data and it returns the information I want to show to the user 
-  and I set it into state.pokemonData.*/
   searchPokemon = () => {
     fetch( `https://pokeapi.co/api/v2/pokemon/${this.state.pokemonToFind}/` )
       .then( res => res.json() )
@@ -36,8 +80,6 @@ class FindPokemon extends Component {
       })
   }
 
-  /*This method returns a promise which contains the information I want to
-  show to the user.*/
   handleData = ( data ) => {
     return new Promise( resolve => {
       let info = {...data};
@@ -68,7 +110,7 @@ class FindPokemon extends Component {
     })
   }
   
-  render() {
+  render() { 
     return(
       <div>
         <PokemonToFind     //This shows the main input and the button.
@@ -78,7 +120,7 @@ class FindPokemon extends Component {
           disableButton={this.state.disableButton}/><hr />
 
         { //this shows the pokemon information.
-          ( this.state.showData ) ? <ShowDataPokemon data={this.state.pokemonData}/>: <PokemonImages /> 
+          ( this.state.showData ) ? <ShowDataPokemon data={this.state.pokemonData}/>: <PokemonImages pokemons={this.state.initialPokemons}/> 
         }
       </div>
     )
