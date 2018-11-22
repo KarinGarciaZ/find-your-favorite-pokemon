@@ -6,7 +6,7 @@ const pokemonToFind = ( props ) => {
   return(
     <div className='row'>
       <div className='col-3'>
-        <img src={pokimage} alt="MyImage" className="pokimage" />
+        <img src={pokimage} alt="MyImage" className="pokimage" onClick={props.clickedImage}/>
       </div>
       <div className='col-6' style={{ marginTop:'20px'}}>
         <input type='text' className="control-form" placeholder='Find your pokemon by its Name or Pokedex Number...' value={ props.name } onChange={ props.valueChanged }/>

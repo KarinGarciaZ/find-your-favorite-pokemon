@@ -1,113 +1,164 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const showDataPokemon = ( props ) => {
+class ShowDataPokemon extends Component {
 
-  /*Here I make an array of <li> where every <li> contains a type of the pokemon to show.
-  This array will be shown in the jsx code.*/
-  let types = null;
-  if( props.data.types ) {
-    types = props.data.types.map( element => {
-      return <li key={element} className="list-group-item list-group-item-primary">{element}</li>
+  state = {
+    pokemon: {
+      name: '',
+      id: 0,
+      height: 0,
+      weight: 0,
+      types: [],
+      abilities: [],
+      games: [],
+      stats: [],
+      moves: [],
+      imageBack: [],
+      imageFront: []
+    }
+  }
+
+  componentDidMount() {
+    this.searchPokemon();
+  }
+
+  searchPokemon = () => {
+    fetch( `https://pokeapi.co/api/v2/pokemon/${this.props.match.params.id}/` )
+      .then( res => res.json() )
+      .catch( error => console.error('Error:', error) )
+      .then( data => this.handleData(data) )
+      .then( info => {
+        this.setState({ pokemon: info });
+      })
+  }
+
+  handleData = ( data ) => {
+    return new Promise( resolve => {
+      let info = {...data};
+      let pokemonInfo = {};
+      pokemonInfo.name = info.forms[0].name;        
+      pokemonInfo.id = info.id;        
+      pokemonInfo.height = info.height;
+      pokemonInfo.weight = info.weight;
+      pokemonInfo.types = info.types.map( element => {
+        return element.type.name
+      });
+      pokemonInfo.abilities = info.abilities.map( element => {
+        return element.ability.name
+      });
+      pokemonInfo.games = info.game_indices.map( element => {
+        return element.version.name
+      });
+      pokemonInfo.stats = info.stats.map( element => {
+        return element.stat.name
+      });
+      pokemonInfo.moves = info.moves.map( element => {
+        return element.move.name
+      });
+      pokemonInfo.imageFront = info.sprites.front_default;
+      pokemonInfo.imageBack = info.sprites.back_default;   
+
+      resolve( pokemonInfo );   
     })
   }
 
-  /*Here I make an array of <li> where every <li> contains an ability of the pokemon to show.
-  This array will be shown in the jsx code.*/
-  let abilities = null;
-  if( props.data.abilities ) {
-    abilities = props.data.abilities.map( element => {
-      return <li key={element} className="list-group-item list-group-item-dark">{element}</li>
-    })
-  }
+  render() {
 
-  /*Here I make an array of <li> where every <li> contains a game of the pokemon to show.
-  This array will be shown in the jsx code.*/
-  let games = null;
-  if( props.data.games ) {
-    games = props.data.games.map( element => {
-      return <li className="list-group-item" style={{padding: '.25rem 1.25rem'}} key={element} >{element}</li>
-    })
-  }
+    let types = null;
+    if( this.state.pokemon.types ) {
+      types = this.state.pokemon.types.map( element => {
+        return <li key={element} className="list-group-item list-group-item-primary">{element}</li>
+      })
+    }
 
-  /*Here I make an array of <li> where every <li> contains a move of the pokemon to show.
-  After I'll slice this array in three parts, because normally this array is too long, so
-  I make three parts of this to make them shorter.
-  These arrays will be shown in the jsx code.*/
-  let moves1 = null;
-  let moves2 = null;
-  let moves3 = null;
-  let moves = null;
-  if( props.data.moves ) {
-    moves = props.data.moves.map( element => {
-      return <li key={element} >{element}</li>
-    })
-    moves1 = moves.slice( 0, moves.length/3 )
-    moves2 = moves.slice( moves.length/3, moves.length/3*2 )
-    moves3 = moves.slice( moves.length/3*2, moves.length)
-  }
-  
-  /*Here I structure the data to be shown, I use data from props and
-  the <li> arrays I created.*/
-  return(
-    <div className='container'>
-      <div className='row'>
-        <div className='col-12 col-md-2'>
-          <img src={props.data.imageFront} alt="MyImage" />
-          <img src={props.data.imageBack} alt="MyImage" />
-        </div>
-        <div className='col-12 col-sm-6 col-md-2'>
-          <label>Pokedex Number</label>
-          <input type="text" className="form-control" value={props.data.id} readOnly/><br/>
-          <label>Height</label>
-          <input type="text" className="form-control" value={props.data.height} readOnly/>          
-        </div>
-        <div className='col-12 col-sm-6 col-md-3'>
-          <label>Name</label>
-          <input type="text" className="form-control" value={props.data.name} readOnly/><br/>
-          <label>Weight</label>
-          <input type="text" className="form-control" value={props.data.weight} readOnly/>          
-        </div>
-        <div className='col-12 col-sm-6 col-md-2'>
-          <label>Types</label>
-          <ul className="list-group">
-            {types}
-          </ul>
-        </div>
-        <div className='col-12 col-sm-6 col-md-3'>
-          <label>Abilities</label>
-          <ul className="list-group">
-            {abilities}
-          </ul>
-        </div>
-      </div>     
-      <div className='row' style={{marginTop: '20px'}}>
-        <div className='col-12 col-sm-6 col-md-3'>
-          <label><strong>Games where appears</strong></label>
-          <ul className="list-group list-group-flush">
-            {games}
-          </ul>
-        </div>
-        <div className='col-12 col-sm-6 col-md-3'>
+    let abilities = null;
+    if( this.state.pokemon.abilities ) {
+      abilities = this.state.pokemon.abilities.map( element => {
+        return <li key={element} className="list-group-item list-group-item-dark">{element}</li>
+      })
+    }
+
+    let games = null;
+    if( this.state.pokemon.games ) {
+      games = this.state.pokemon.games.map( element => {
+        return <li className="list-group-item" style={{padding: '.25rem 1.25rem'}} key={element} >{element}</li>
+      })
+    }
+
+    let moves1 = null;
+    let moves2 = null;
+    let moves3 = null;
+    let moves = null;
+    if( this.state.pokemon.moves ) {
+      moves = this.state.pokemon.moves.map( element => {
+        return <li key={element} >{element}</li>
+      })
+      moves1 = moves.slice( 0, moves.length/3 )
+      moves2 = moves.slice( moves.length/3, moves.length/3*2 )
+      moves3 = moves.slice( moves.length/3*2, moves.length)
+    }
+
+    return(
+      <div className='container'>
+        <div className='row'>
+          <div className='col-12 col-md-2'>
+            <img src={this.state.pokemon.imageFront} alt="MyImage" />
+            <img src={this.state.pokemon.imageBack} alt="MyImage" />
+          </div>
+          <div className='col-12 col-sm-6 col-md-2'>
+            <label>Pokedex Number</label>
+            <input type="text" className="form-control" value={this.state.pokemon.id} readOnly/><br/>
+            <label>Height</label>
+            <input type="text" className="form-control" value={this.state.pokemon.height} readOnly/>          
+          </div>
+          <div className='col-12 col-sm-6 col-md-3'>
+            <label>Name</label>
+            <input type="text" className="form-control" value={this.state.pokemon.name} readOnly/><br/>
+            <label>Weight</label>
+            <input type="text" className="form-control" value={this.state.pokemon.weight} readOnly/>          
+          </div>
+          <div className='col-12 col-sm-6 col-md-2'>
+            <label>Types</label>
+            <ul className="list-group">
+              {types}
+            </ul>
+          </div>
+          <div className='col-12 col-sm-6 col-md-3'>
+            <label>Abilities</label>
+            <ul className="list-group">
+              {abilities}
+            </ul>
+          </div>
+        </div>     
+        <div className='row' style={{marginTop: '20px'}}>
+          <div className='col-12 col-sm-6 col-md-3'>
+            <label><strong>Games where appears</strong></label>
+            <ul className="list-group list-group-flush">
+              {games}
+            </ul>
+          </div>
+          <div className='col-12 col-sm-6 col-md-3'>
+            <label><strong>Moves</strong></label>
+            <ul>
+              {moves1}
+            </ul>
+          </div>
+          <div className='col-12 col-sm-6 col-md-3'>
           <label><strong>Moves</strong></label>
-          <ul>
-            {moves1}
-          </ul>
-        </div>
-        <div className='col-12 col-sm-6 col-md-3'>
-        <label><strong>Moves</strong></label>
-          <ul>
-            {moves2}
-          </ul>
-        </div>
-        <div className='col-12 col-sm-6 col-md-3'>
-        <label><strong>Moves</strong></label>
-          <ul>
-            {moves3}
-          </ul>
-        </div>
-      </div> 
-    </div>
-  );
+            <ul>
+              {moves2}
+            </ul>
+          </div>
+          <div className='col-12 col-sm-6 col-md-3'>
+          <label><strong>Moves</strong></label>
+            <ul>
+              {moves3}
+            </ul>
+          </div>
+        </div> 
+      </div>
+    );
+  }
 }
 
-export default showDataPokemon;
+export default ShowDataPokemon;
