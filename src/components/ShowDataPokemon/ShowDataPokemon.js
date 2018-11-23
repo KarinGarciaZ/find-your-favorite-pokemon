@@ -13,8 +13,12 @@ class ShowDataPokemon extends Component {
       games: [],
       stats: [],
       moves: [],
-      imageBack: [],
-      imageFront: []
+      images: {
+        front: '',
+        back: '',
+        backShiny: '',
+        frontShiny: '',
+      }      
     }
   }
 
@@ -43,7 +47,6 @@ class ShowDataPokemon extends Component {
   handleData = ( data ) => {
     return new Promise( resolve => {
       let info = {...data};
-      console.log(info)
       let pokemonInfo = {};
       pokemonInfo.name = info.forms[0].name;        
       pokemonInfo.id = info.id;        
@@ -64,11 +67,19 @@ class ShowDataPokemon extends Component {
       pokemonInfo.moves = info.moves.map( element => {
         return element.move.name
       });
-      pokemonInfo.imageFront = info.sprites.front_default;
-      pokemonInfo.imageBack = info.sprites.back_default;   
-
+      let images = {}
+      images.front = info.sprites.front_default;
+      images.back = info.sprites.back_default;   
+      images.frontShiny = info.sprites.front_shiny;
+      images.backShiny = info.sprites.back_shiny; 
+      pokemonInfo.images = images;
+      console.log(info)
       resolve( pokemonInfo );   
     })
+  }
+
+  manageData = ( ) => {
+    
   }
 
   render() {
@@ -76,14 +87,14 @@ class ShowDataPokemon extends Component {
     let types = null;
     if( this.state.pokemon.types ) {
       types = this.state.pokemon.types.map( element => {
-        return <li key={element} className="list-group-item list-group-item-primary">{element}</li>
+        return <li key={element} className={element}>{element}</li>
       })
     }
 
     let abilities = null;
     if( this.state.pokemon.abilities ) {
       abilities = this.state.pokemon.abilities.map( element => {
-        return <li key={element} className="list-group-item list-group-item-dark">{element}</li>
+        return <li key={element}>{element}</li>
       })
     }
 
@@ -110,35 +121,60 @@ class ShowDataPokemon extends Component {
     return(
       <div className='container'>
         <div className='row'>
-          <div className='col-12 col-md-2'>
-            <img src={this.state.pokemon.imageFront} alt="MyImage" />
-            <img src={this.state.pokemon.imageBack} alt="MyImage" />
+          <div className='col-12 col-md-3'>
+            <div className='images'>
+              <div className='images__pokemon images__default'>
+                <p className='images__type normal-pok'>Normal</p>
+                <img src={this.state.pokemon.images.front} className='images__img' alt="Front" />
+                <img src={this.state.pokemon.images.back} className='images__img' alt="Back" />
+              </div>
+
+              <div className='images__pokemon images__shiny'>
+                <p className='images__type shiny'>Shiny</p>
+                <img src={this.state.pokemon.images.frontShiny} className='images__img' alt="Front" />
+                <img src={this.state.pokemon.images.backShiny} className='images__img' alt="Bank" />
+              </div>           
+              
+            </div>
           </div>
-          <div className='col-12 col-sm-6 col-md-2'>
-            <label>Pokedex Number</label>
-            <input type="text" className="form-control" value={this.state.pokemon.id} readOnly/><br/>
-            <label>Height</label>
-            <input type="text" className="form-control" value={this.state.pokemon.height} readOnly/>          
+          <div className='col-6 col-md-2'>
+
+            <div className='form-infos'>
+              <label>Pokedex</label>
+              <div className="form-infos__input">{this.state.pokemon.id}</div>
+              <label>Height</label>
+              <div className="form-infos__input">{this.state.pokemon.height}</div>         
+            </div>
+            
           </div>
-          <div className='col-12 col-sm-6 col-md-3'>
-            <label>Name</label>
-            <input type="text" className="form-control" value={this.state.pokemon.name} readOnly/><br/>
-            <label>Weight</label>
-            <input type="text" className="form-control" value={this.state.pokemon.weight} readOnly/>          
+          <div className='col-6 col-md-2'>
+            <div className='form-infos'>
+
+              <label>Name</label>
+              <div className="form-infos__input capitalize">{this.state.pokemon.name}</div>
+              <label>Weight</label>
+              <div className="form-infos__input">{this.state.pokemon.weight}</div>   
+
+            </div>          
           </div>
-          <div className='col-12 col-sm-6 col-md-2'>
-            <label>Types</label>
-            <ul className="list-group">
-              {types}
-            </ul>
+          <div className='col-6 col-md-2'>
+            <div className='types'>
+              <label>Types</label>
+              <ul className="types__list-types">
+                {types}
+              </ul>
+            </div>            
           </div>
-          <div className='col-12 col-sm-6 col-md-3'>
-            <label>Abilities</label>
-            <ul className="list-group">
-              {abilities}
-            </ul>
+          <div className='col-6 col-md-3'>
+            <div className='abilities'>
+              <label>Abilities</label>
+              <ul className="abilities__list-abilities">
+                {abilities}
+              </ul>
+            </div>            
           </div>
-        </div>     
+        </div>
+
         <div className='row' style={{marginTop: '20px'}}>
           <div className='col-12 col-sm-6 col-md-3'>
             <label><strong>Games where appears</strong></label>

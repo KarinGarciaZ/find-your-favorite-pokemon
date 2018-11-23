@@ -2,8 +2,10 @@
 @import "abstracts/mixins";
 
 @import "base/base";
+@import "base/utilities";
 
 @import "components/form-search";
 @import "components/card";
+@import "components/showDataPokemon";
 
 @import "layout/grid";
