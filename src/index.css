@@ -228,10 +228,14 @@ body {
 .abilities {
   margin-top: 2rem;
   font-size: 2rem; }
-  .abilities__list-abilities {
-    list-style: none; }
-    .abilities__list-abilities li {
-      text-transform: capitalize; }
+  .abilities__list-abilities li {
+    padding: 0 3rem;
+    list-style: none;
+    background-image: url("./assets/img/Pokeball.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 1.8rem;
+    text-transform: capitalize; }
 
 .rowg {
   max-width: 150rem;
