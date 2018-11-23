@@ -2,8 +2,8 @@
   perspective: 150rem;
   -moz-perspective: 150rem;
   position: relative;
-  height: 22rem;
-  width: 15rem;
+  height: 23rem;
+  width: 18rem;
   transition: all .2s ease;
   border-radius: .3rem;
   box-shadow: 0 .5rem 2rem $black-transparent-2;
@@ -15,12 +15,14 @@
     cursor: pointer;
   }
 
-  &__picture {
-    background-size: cover; 
-    background-position: top;
-    height: 10rem;    
-    background-blend-mode: overlay;        
+  &__picture {      
     text-align: center;
+    height: 13rem;
+
+    img {
+      object-fit: cover;
+      transform: scale(1.2) translateY(1rem);
+    }
   }
 
   &__details {

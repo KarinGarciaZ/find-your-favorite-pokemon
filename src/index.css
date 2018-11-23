@@ -63,8 +63,8 @@ body {
   perspective: 150rem;
   -moz-perspective: 150rem;
   position: relative;
-  height: 22rem;
-  width: 15rem;
+  height: 23rem;
+  width: 18rem;
   transition: all .2s ease;
   border-radius: .3rem;
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
@@ -74,11 +74,11 @@ body {
     transform: scale(1.1);
     cursor: pointer; }
   .cards__picture {
-    background-size: cover;
-    background-position: top;
-    height: 10rem;
-    background-blend-mode: overlay;
-    text-align: center; }
+    text-align: center;
+    height: 13rem; }
+    .cards__picture img {
+      object-fit: cover;
+      transform: scale(1.2) translateY(1rem); }
   .cards__details ul {
     list-style: none;
     width: 80%;

@@ -21,7 +21,7 @@ class PokemonImages extends Component {
               </div>
               <div className="cards__details">
                 <ul>
-                  <li>Pokedex Number <strong>{eachPokemon.id}</strong></li>
+                  <li><small>Pokedex Number:</small> <strong>{eachPokemon.id}</strong></li>
                   <li>{eachPokemon.name}</li>
                 </ul>
                 {types}
