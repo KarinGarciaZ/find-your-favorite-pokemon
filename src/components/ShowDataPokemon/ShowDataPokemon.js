@@ -18,7 +18,15 @@ class ShowDataPokemon extends Component {
         back: '',
         backShiny: '',
         frontShiny: '',
-      }      
+      },
+      damages: {
+        doubleDamageFrom: [],
+        doubleDamageTo: [],
+        halfDamageFrom: [],
+        halfDamageTo: [],
+        noDamageFrom: [],
+        noDamageTo: []
+      }   
     }
   }
 
@@ -39,9 +47,7 @@ class ShowDataPokemon extends Component {
       .then( res => res.json() )
       .catch( error => console.error('Error:', error) )
       .then( data => this.handleData(data) )
-      .then( info => {
-        this.setState({ pokemon: info });
-      })
+      .then( info => this.getDamages( info ))
   }
 
   handleData = ( data ) => {
@@ -67,19 +73,49 @@ class ShowDataPokemon extends Component {
       pokemonInfo.moves = info.moves.map( element => {
         return element.move.name
       });
+
       let images = {}
       images.front = info.sprites.front_default;
       images.back = info.sprites.back_default;   
       images.frontShiny = info.sprites.front_shiny;
       images.backShiny = info.sprites.back_shiny; 
       pokemonInfo.images = images;
-      console.log(info)
       resolve( pokemonInfo );   
     })
   }
 
-  manageData = ( ) => {
-    
+  getDamages = ( info ) => {
+    let promises = [];
+    for( let index = 0; index < info.types.length; index++ ){
+      promises.push(
+        fetch(`https://pokeapi.co/api/v2/type/${info.types[index]}/`)
+        .then( res => res.json() )
+        ) 
+    }
+
+    let allDamages = {
+      doubleDamageFrom: [],
+      doubleDamageTo: [],
+      halfDamageFrom: [],
+      halfDamageTo: [],
+      noDamageFrom: [],
+      noDamageTo: []
+    }
+
+    Promise.all( promises )
+      .then( damages => {
+        damages.forEach( damage => {
+          allDamages.doubleDamageFrom = allDamages.doubleDamageFrom.concat( damage.damage_relations.double_damage_from.map( type => type.name ));
+          allDamages.doubleDamageTo = allDamages.doubleDamageTo.concat( damage.damage_relations.double_damage_to.map( type => type.name ));
+          allDamages.halfDamageFrom = allDamages.halfDamageFrom.concat( damage.damage_relations.half_damage_from.map( type => type.name ));
+          allDamages.halfDamageTo = allDamages.halfDamageTo.concat( damage.damage_relations.half_damage_to.map( type => type.name ));
+          allDamages.noDamageFrom = allDamages.noDamageFrom.concat( damage.damage_relations.no_damage_from.map( type => type.name ));
+          allDamages.noDamageTo = allDamages.noDamageTo.concat( damage.damage_relations.no_damage_to.map( type => type.name ));
+        })
+
+        info.damages = allDamages;
+        this.setState( { pokemon: info } )
+      })
   }
 
   render() {
