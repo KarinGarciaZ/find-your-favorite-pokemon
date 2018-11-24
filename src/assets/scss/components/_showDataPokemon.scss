@@ -71,6 +71,30 @@
   }
 }
 
+.types-damage {
+  margin-top: 2rem;  
+  font-size: 2rem;
+
+  &__list-types {
+    list-style: none;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+  
+    li {
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid wheat;
+      color: wheat;
+      margin: .2rem;
+      text-transform: uppercase;
+      display: block;
+      max-width: 6rem;
+      padding: .2rem .5rem;
+    }
+  }
+}
+
 .abilities {
   margin-top: 2rem;  
   font-size: 2rem;

@@ -127,6 +127,34 @@ class ShowDataPokemon extends Component {
       })
     }
 
+    let doubleDamageFrom = null;
+    if( this.state.pokemon.damages.doubleDamageFrom ) {
+      doubleDamageFrom = this.state.pokemon.damages.doubleDamageFrom.map( element => {
+        return <li key={element} className={element}>{element}</li>
+      })
+    }
+
+    let doubleDamageTo = null;
+    if( this.state.pokemon.damages.doubleDamageTo ) {
+      doubleDamageTo = this.state.pokemon.damages.doubleDamageTo.map( element => {
+        return <li key={element} className={element}>{element}</li>
+      })
+    }
+
+    let halfDamageFrom = null;
+    if( this.state.pokemon.damages.halfDamageFrom ) {
+      halfDamageFrom = this.state.pokemon.damages.halfDamageFrom.map( element => {
+        return <li key={element} className={element}>{element}</li>
+      })
+    }
+
+    let halfDamageTo = null;
+    if( this.state.pokemon.damages.halfDamageTo ) {
+      halfDamageTo = this.state.pokemon.damages.halfDamageTo.map( element => {
+        return <li key={element} className={element}>{element}</li>
+      })
+    }
+
     let abilities = null;
     if( this.state.pokemon.abilities ) {
       abilities = this.state.pokemon.abilities.map( element => {
@@ -173,6 +201,7 @@ class ShowDataPokemon extends Component {
               
             </div>
           </div>
+          
           <div className='col-6 col-md-2'>
 
             <div className='form-infos'>
@@ -181,9 +210,17 @@ class ShowDataPokemon extends Component {
               <label>Height</label>
               <div className="form-infos__input">{this.state.pokemon.height}</div>         
             </div>
+
+            <div className='types'>
+              <label>Types</label>
+              <ul className="types__list-types">
+                {types}
+              </ul>
+            </div>   
             
           </div>
-          <div className='col-6 col-md-2'>
+          
+          <div className='col-6 col-md-3'>
             <div className='form-infos'>
 
               <label>Name</label>
@@ -191,27 +228,50 @@ class ShowDataPokemon extends Component {
               <label>Weight</label>
               <div className="form-infos__input">{this.state.pokemon.weight}</div>   
 
+              <div className='abilities'>
+                <label>Abilities</label>
+                <ul className="abilities__list-abilities">
+                  {abilities}
+                </ul>
+              </div>               
+
             </div>          
           </div>
-          <div className='col-6 col-md-2'>
-            <div className='types'>
-              <label>Types</label>
-              <ul className="types__list-types">
-                {types}
+
+          <div className='col-12 col-md-4'>
+
+            <div className='types-damage'>
+              <label>Double damage to</label>
+              <ul className="types-damage__list-types">
+                {doubleDamageTo}
               </ul>
-            </div>            
-          </div>
-          <div className='col-6 col-md-3'>
-            <div className='abilities'>
-              <label>Abilities</label>
-              <ul className="abilities__list-abilities">
-                {abilities}
+            </div>   
+
+            <div className='types-damage'>
+              <label>Double damage from</label>
+              <ul className="types-damage__list-types">
+                {doubleDamageFrom}
               </ul>
-            </div>            
+            </div> 
+
+            <div className='types-damage'>
+              <label>Half damage from</label>
+              <ul className="types-damage__list-types">
+                {halfDamageFrom}
+              </ul>
+            </div> 
+
+            <div className='types-damage'>
+              <label>Half damage to</label>
+              <ul className="types-damage__list-types">
+                {halfDamageTo}
+              </ul>
+            </div> 
+
           </div>
         </div>
 
-        <div className='row' style={{marginTop: '20px'}}>
+        <div className='row'>
           <div className='col-12 col-sm-6 col-md-3'>
             <label><strong>Games where appears</strong></label>
             <ul className="list-group list-group-flush">

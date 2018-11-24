@@ -225,6 +225,25 @@ body {
       max-width: 12rem;
       padding: .2rem 1rem; }
 
+.types-damage {
+  margin-top: 2rem;
+  font-size: 2rem; }
+  .types-damage__list-types {
+    list-style: none;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap; }
+    .types-damage__list-types li {
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid wheat;
+      color: wheat;
+      margin: .2rem;
+      text-transform: uppercase;
+      display: block;
+      max-width: 6rem;
+      padding: .2rem .5rem; }
+
 .abilities {
   margin-top: 2rem;
   font-size: 2rem; }

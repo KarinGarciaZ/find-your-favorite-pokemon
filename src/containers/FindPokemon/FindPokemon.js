@@ -107,8 +107,8 @@ class FindPokemon extends Component {
           disableButton={this.state.disableButton}/><hr />
 
         <Switch>
-          <Route exact path="/" render={ () =>( <PokemonImages pokemons={this.state.initialPokemons} clickCard={this.onClickCard}/> ) }/>
-          <Route exact path="/pokemon/:id" render={ ( props ) =>(  <ShowDataPokemon {...props}/> ) }/>
+          <Route path="/pokemon/:id" render={ ( props ) =>(  <ShowDataPokemon {...props}/> ) }/>
+          <Route path="/" render={ () =>( <PokemonImages pokemons={this.state.initialPokemons} clickCard={this.onClickCard}/> ) }/>
         </Switch>
       </div>
     )
