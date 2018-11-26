@@ -293,12 +293,13 @@ body {
       flex-grow: 1; }
 
 .show-all {
-  padding: 2rem 0;
+  padding-top: 2rem;
   position: relative; }
   .show-all__btn {
     position: absolute;
     left: 50%;
-    transform: translate(-50%); }
+    transform: translate(-50%);
+    margin-bottom: 2rem; }
 
 .rowg {
   max-width: 150rem;
