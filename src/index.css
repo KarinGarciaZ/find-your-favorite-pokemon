@@ -292,6 +292,14 @@ body {
       border-radius: 5px;
       flex-grow: 1; }
 
+.show-all {
+  padding-top: 2rem;
+  position: relative; }
+  .show-all__btn {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%); }
+
 .rowg {
   max-width: 150rem;
   margin: 0 auto; }

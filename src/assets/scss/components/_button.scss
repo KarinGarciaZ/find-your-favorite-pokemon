@@ -1,0 +1,10 @@
+.show-all {
+  padding-top: 2rem;
+  position: relative;
+
+  &__btn {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+  }
+}

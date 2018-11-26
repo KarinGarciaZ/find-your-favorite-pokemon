@@ -10,7 +10,8 @@ class FindPokemon extends Component {
     pokemonToFind: '',
     disableButton: true,
     initialPokemons: [],
-    pokemonShown: 0
+    pokemonShown: 0,
+    loadAllPokemon: false
   }
 
   componentDidMount() {
@@ -58,7 +59,7 @@ class FindPokemon extends Component {
         
     let arrayNames = [];
     arrayNames = data.results.map( pokemon => pokemon.name );
-    arrayNames = arrayNames.splice(0, arrayNames.length -57);
+    arrayNames = arrayNames.splice(0, arrayNames.length - 57);
 
     this.get4Pokemons(arrayNames);
    
@@ -94,9 +95,15 @@ class FindPokemon extends Component {
     this.props.history.push(`/pokemon/${this.state.pokemonToFind}`)  
   }
 
+  handlePokemonShown = ( ) => {
+    this.setState({loadAllPokemon: true})
+  }
   
-  
-  render() { 
+  render() {     
+    let loadPokemons = <PokemonImages pokemons={this.state.initialPokemons} clickCard={this.onClickCard}/>;
+    if( !this.state.loadAllPokemon && this.state.initialPokemons.length > 59 )      
+        loadPokemons = <PokemonImages pokemons={this.state.initialPokemons.slice(0, 60)} clickCard={this.onClickCard}/>
+
     return(
       <div>
         <PokemonToFind     //This shows the main input and the button.
@@ -108,8 +115,12 @@ class FindPokemon extends Component {
 
         <Switch>
           <Route path="/pokemon/:id" render={ ( props ) =>(  <ShowDataPokemon {...props}/> ) }/>
-          <Route path="/" render={ () =>( <PokemonImages pokemons={this.state.initialPokemons} clickCard={this.onClickCard}/> ) }/>
+          <Route path="/" render={ () =>( loadPokemons ) }/>
         </Switch>
+
+        {( !this.state.loadAllPokemon ) ? <div className='show-all'>
+          <button className='botton show-all__btn' onClick={this.handlePokemonShown}>Show all pokemons</button>
+        </div> : null}
       </div>
     )
   }
