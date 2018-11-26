@@ -24,8 +24,6 @@ class ShowDataPokemon extends Component {
         doubleDamageTo: [],
         halfDamageFrom: [],
         halfDamageTo: [],
-        noDamageFrom: [],
-        noDamageTo: []
       }   
     }
   }
@@ -97,9 +95,7 @@ class ShowDataPokemon extends Component {
       doubleDamageFrom: [],
       doubleDamageTo: [],
       halfDamageFrom: [],
-      halfDamageTo: [],
-      noDamageFrom: [],
-      noDamageTo: []
+      halfDamageTo: []
     }
 
     Promise.all( promises )
@@ -109,17 +105,19 @@ class ShowDataPokemon extends Component {
           allDamages.doubleDamageTo = allDamages.doubleDamageTo.concat( damage.damage_relations.double_damage_to.map( type => type.name ));
           allDamages.halfDamageFrom = allDamages.halfDamageFrom.concat( damage.damage_relations.half_damage_from.map( type => type.name ));
           allDamages.halfDamageTo = allDamages.halfDamageTo.concat( damage.damage_relations.half_damage_to.map( type => type.name ));
-          allDamages.noDamageFrom = allDamages.noDamageFrom.concat( damage.damage_relations.no_damage_from.map( type => type.name ));
-          allDamages.noDamageTo = allDamages.noDamageTo.concat( damage.damage_relations.no_damage_to.map( type => type.name ));
         })
 
+        allDamages.doubleDamageFrom = allDamages.doubleDamageFrom.filter( (item, index, self) =>  self.indexOf(item) === index);
+        allDamages.doubleDamageTo = allDamages.doubleDamageTo.filter( (item, index, self) =>  self.indexOf(item) === index);
+        allDamages.halfDamageFrom = allDamages.halfDamageFrom.filter( (item, index, self) =>  self.indexOf(item) === index);
+        allDamages.halfDamageTo = allDamages.halfDamageTo.filter( (item, index, self) =>  self.indexOf(item) === index);
+        
         info.damages = allDamages;
         this.setState( { pokemon: info } )
       })
   }
 
-  render() {
-
+  /*manageLists = () => {
     let types = null;
     if( this.state.pokemon.types ) {
       types = this.state.pokemon.types.map( element => {
@@ -180,6 +178,65 @@ class ShowDataPokemon extends Component {
       moves1 = moves.slice( 0, moves.length/3 )
       moves2 = moves.slice( moves.length/3, moves.length/3*2 )
       moves3 = moves.slice( moves.length/3*2, moves.length)
+    }
+  }*/
+
+  render() {
+
+    let types = null;
+    if( this.state.pokemon.types ) {
+      types = this.state.pokemon.types.map( element => {
+        return <li key={element} className={element}>{element}</li>
+      })
+    }
+
+    let doubleDamageFrom = null;
+    if( this.state.pokemon.damages.doubleDamageFrom ) {
+      doubleDamageFrom = this.state.pokemon.damages.doubleDamageFrom.map( element => {
+        return <li key={element} className={element}>{element}</li>
+      })
+    }
+
+    let doubleDamageTo = null;
+    if( this.state.pokemon.damages.doubleDamageTo ) {
+      doubleDamageTo = this.state.pokemon.damages.doubleDamageTo.map( element => {
+        return <li key={element} className={element}>{element}</li>
+      })
+    }
+
+    let halfDamageFrom = null;
+    if( this.state.pokemon.damages.halfDamageFrom ) {
+      halfDamageFrom = this.state.pokemon.damages.halfDamageFrom.map( element => {
+        return <li key={element} className={element}>{element}</li>
+      })
+    }
+
+    let halfDamageTo = null;
+    if( this.state.pokemon.damages.halfDamageTo ) {
+      halfDamageTo = this.state.pokemon.damages.halfDamageTo.map( element => {
+        return <li key={element} className={element}>{element}</li>
+      })
+    }
+
+    let abilities = null;
+    if( this.state.pokemon.abilities ) {
+      abilities = this.state.pokemon.abilities.map( element => {
+        return <li key={element}>{element}</li>
+      })
+    }
+
+    let games = null;
+    if( this.state.pokemon.games ) {
+      games = this.state.pokemon.games.map( element => {
+        return <li key={element} >{element}</li>
+      })
+    }
+
+    let moves = null;
+    if( this.state.pokemon.moves ) {
+      moves = this.state.pokemon.moves.map( element => {
+        return <li key={element} >{element}</li>
+      })
     }
 
     return(
@@ -266,35 +323,27 @@ class ShowDataPokemon extends Component {
               <ul className="types-damage__list-types">
                 {halfDamageTo}
               </ul>
-            </div> 
+            </div>
 
           </div>
         </div>
 
         <div className='row'>
-          <div className='col-12 col-sm-6 col-md-3'>
-            <label><strong>Games where appears</strong></label>
-            <ul className="list-group list-group-flush">
-              {games}
-            </ul>
+          <div className='col-12 col-md-3'>
+            <div className='videogames'>  
+              <label><strong>Games where appears</strong></label>                        
+              <ul className="videogames__list">
+                {games}
+              </ul>
+            </div>            
           </div>
-          <div className='col-12 col-sm-6 col-md-3'>
-            <label><strong>Moves</strong></label>
-            <ul>
-              {moves1}
-            </ul>
-          </div>
-          <div className='col-12 col-sm-6 col-md-3'>
-          <label><strong>Moves</strong></label>
-            <ul>
-              {moves2}
-            </ul>
-          </div>
-          <div className='col-12 col-sm-6 col-md-3'>
-          <label><strong>Moves</strong></label>
-            <ul>
-              {moves3}
-            </ul>
+          <div className='col-12 col-md-9'>
+            <div className='moves'>
+              <label><strong>Moves</strong></label>
+              <ul className="moves__list">
+                {moves}
+              </ul>
+            </div>            
           </div>
         </div> 
       </div>

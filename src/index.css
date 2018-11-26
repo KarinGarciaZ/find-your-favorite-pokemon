@@ -227,7 +227,8 @@ body {
 
 .types-damage {
   margin-top: 2rem;
-  font-size: 2rem; }
+  font-size: 2rem;
+  text-transform: capitalize; }
   .types-damage__list-types {
     list-style: none;
     text-align: center;
@@ -255,6 +256,41 @@ body {
     background-position: left center;
     background-size: 1.8rem;
     text-transform: capitalize; }
+
+.videogames {
+  margin-top: 1rem;
+  font-size: 2rem;
+  text-transform: capitalize; }
+  .videogames__list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    font-size: 1.5rem; }
+    .videogames__list li {
+      padding: 0 3rem;
+      list-style: none;
+      background-image: url("./assets/img/control.svg");
+      background-repeat: no-repeat;
+      background-position: left center;
+      background-size: 1.5rem;
+      text-transform: capitalize; }
+
+.moves {
+  margin-top: 1rem;
+  font-size: 2rem;
+  text-transform: capitalize; }
+  .moves__list {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.2rem; }
+    .moves__list li {
+      margin: .6rem;
+      list-style: none;
+      text-transform: capitalize;
+      background-color: rgba(128, 128, 128, 0.2);
+      padding: .5rem 1rem;
+      border-radius: 5px;
+      flex-grow: 1; }
 
 .rowg {
   max-width: 150rem;

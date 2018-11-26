@@ -74,6 +74,7 @@
 .types-damage {
   margin-top: 2rem;  
   font-size: 2rem;
+  text-transform: capitalize;
 
   &__list-types {
     list-style: none;
@@ -113,3 +114,47 @@
   }
 }
 
+.videogames {
+  margin-top: 1rem;
+  font-size: 2rem;
+  text-transform: capitalize;
+
+  &__list {    
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  font-size: 1.5rem;
+
+  li {
+    padding: 0 3rem;
+    list-style: none;
+    background-image: url("./assets/img/control.svg");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 1.5rem;
+    text-transform: capitalize;
+    }
+  }
+}
+
+.moves {
+  margin-top: 1rem;
+  font-size: 2rem;
+  text-transform: capitalize;
+
+  &__list {    
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.2rem;
+
+  li {    
+    margin: .6rem;
+    list-style: none;
+    text-transform: capitalize;
+    background-color: $gray-transparent-2;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    flex-grow: 1;
+    }
+  }
+}
