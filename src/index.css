@@ -293,7 +293,7 @@ body {
       flex-grow: 1; }
 
 .show-all {
-  padding-top: 2rem;
+  padding: 2rem 0;
   position: relative; }
   .show-all__btn {
     position: absolute;

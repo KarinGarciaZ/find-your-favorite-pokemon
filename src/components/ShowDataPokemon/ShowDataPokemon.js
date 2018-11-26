@@ -247,14 +247,16 @@ class ShowDataPokemon extends Component {
               <div className='images__pokemon images__default'>
                 <p className='images__type normal-pok'>Normal</p>
                 <img src={this.state.pokemon.images.front} className='images__img' alt="Front" />
-                <img src={this.state.pokemon.images.back} className='images__img' alt="Back" />
+                {(this.state.pokemon.images.back) ? <img src={this.state.pokemon.images.back} className='images__img' alt="Back" />: null}
               </div>
 
+            {(this.state.pokemon.images.frontShiny) ? 
               <div className='images__pokemon images__shiny'>
                 <p className='images__type shiny'>Shiny</p>
                 <img src={this.state.pokemon.images.frontShiny} className='images__img' alt="Front" />
-                <img src={this.state.pokemon.images.backShiny} className='images__img' alt="Bank" />
-              </div>           
+                {(this.state.pokemon.images.backShiny) ? <img src={this.state.pokemon.images.backShiny} className='images__img' alt="Bank" /> : null}
+              </div>      
+            : null}     
               
             </div>
           </div>
