@@ -18,13 +18,10 @@ class FindPokemon extends Component {
     this.searchAllPokemons()
   }
 
-  get4Pokemons = ( arrayNames ) => {
+  get4Pokemons = ( countPokemons ) => {
     let _4promises = [];
     for( let index = 0; index < 4; index++ ){
-      _4promises.push(
-        fetch(`https://pokeapi.co/api/v2/pokemon/${arrayNames[this.state.pokemonShown + index]}/`)
-        .then( res => res.json() )
-        ) 
+      _4promises.push(fetch(`https://pokeapi.co/api/v2/pokemon/${this.state.pokemonShown + index + 1}/`).then( res => res.json() )) 
     }
 
     Promise.all(_4promises)
@@ -47,22 +44,13 @@ class FindPokemon extends Component {
         pokemonShown: this.state.pokemonShown + 4
        })
 
-       if( this.state.pokemonShown < arrayNames.length )
-        this.get4Pokemons( arrayNames );
+      if( this.state.pokemonShown < countPokemons )
+        this.get4Pokemons( countPokemons );
     } )
   }
 
-  searchAllPokemons = async () => {
-
-    let res = await fetch( `https://pokeapi.co/api/v2/pokemon/` )
-    let data = await res.json()
-        
-    let arrayNames = [];
-    arrayNames = data.results.map( pokemon => pokemon.name );
-    arrayNames = arrayNames.splice(0, arrayNames.length - 57);
-
-    this.get4Pokemons(arrayNames);
-   
+  searchAllPokemons = async () => {        
+    this.get4Pokemons(56);   
   }
 
   generateRandomNumber = (  ) => {
@@ -96,7 +84,8 @@ class FindPokemon extends Component {
   }
 
   handlePokemonShown = ( ) => {
-    this.setState({loadAllPokemon: true})
+    this.get4Pokemons( 800 );
+    this.setState({ loadAllPokemon: true })
   }
   
   render() {     
